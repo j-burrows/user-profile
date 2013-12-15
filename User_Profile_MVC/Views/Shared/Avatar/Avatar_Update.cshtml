@@ -1,0 +1,23 @@
+﻿@model UserProfileLib.Business.BAvatar
+@using User_Profile.Helpers
+
+@{Model.Format();}
+
+@using (Html.BeginForm("Avatar_Update", "Home", FormMethod.Post, 
+    new {
+        @id = "AvatarUpdate_" + Model.Avatar_ID,
+        @class = "AvatarUpdate PartialUpdateForm"
+    })) { 
+    @Model.ValidationErrors["Data"].ValidationSection()
+    
+    <input type="hidden" value="@Model.Avatar_ID" name="Avatar_ID"/>
+    @Model.ValidationErrors["Avatar_ID"].ValidationSection()
+    
+    <input type="text" name="Name" value="@Model.Name" placeholder="Name" maxlength="32" />
+    @Model.ValidationErrors["Name"].ValidationSection()
+    
+    <input type="text" name="Url" value="@Model.Url" placeholder="Url" maxlength="1024" />
+    @Model.ValidationErrors["Url"].ValidationSection()
+    
+    <input type="submit" value="Update Avatar" />
+}

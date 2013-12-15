@@ -1,0 +1,24 @@
+﻿@model UserProfileLib.Business.BUser_Profile
+@using User_Profile.Helpers
+
+@{Model.Format();}
+
+@using (Html.BeginForm("UserProfile_Delete", "Home", FormMethod.Post, 
+    new {
+        @id = "UserProfileDelete_" + Model.User_Profile_ID,
+        @class = "UserProfileDelete PartialUpdateForm"
+    })) { 
+    <span class="validationError">@Model.ValidationErrors["Data"]</span>
+    @Model.ValidationErrors["Data"].ValidationSection()
+    
+    <input type="hidden" value="@Model.User_Profile_ID" name="User_Profile_ID"/>
+    @Model.ValidationErrors["User_Profile_ID"].ValidationSection()
+    
+    <input type="hidden" value="@Model.username" name="username"/>
+    @Model.ValidationErrors["username"].ValidationSection()
+    
+    <input type="hidden" value="@Model.Avatar_ID" name="Avatar_ID"/>
+    @Model.ValidationErrors["Avatar_ID"].ValidationSection()
+    
+    <input type="submit" value="Delete User Profile" />
+}

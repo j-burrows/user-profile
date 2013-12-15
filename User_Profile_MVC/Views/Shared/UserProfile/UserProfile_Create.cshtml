@@ -1,0 +1,33 @@
+﻿@model UserProfileLib.Business.BUser_Profile
+@using User_Profile.Helpers
+@using System.Collections.Generic;
+@using Repository.Business.Protocols;
+
+@{Model.Format();}
+
+@using (Html.BeginForm("UserProfile_Create", "Home", FormMethod.Post,
+    new
+    {
+        @id = "UserProfileCreate_" + Model.User_Profile_ID,
+        @class = "UserProfileCreate PartialUpdateForm"
+    }))
+{ 
+    <input type="hidden" value="@ViewData["viewName"]" name="returnView" />
+    
+    @Model.User_Profile_ID_Rules.Create.HtmlInput(Model.User_Profile_ID)
+
+    var avatars = (IEnumerable<UserProfileLib.Business.BAvatar>)ViewData["avatars"];
+    foreach (var avatar in avatars) {
+        <input type="radio" name="Avatar_ID" id="UserCreate0_Avatar_@avatar.Avatar_ID" value="@avatar.Avatar_ID"/>
+        <label for="UserCreate0_Avatar_@avatar.Avatar_ID" 
+            style="background-image: url('@avatar.Url'); background-size: cover">
+            @avatar.Name
+        </label>
+    }
+    
+    @Model.username_Rules.Create.HtmlInput(Model.username)
+    @Model.Long_Alias_Rules.Create.HtmlInput(Model.Long_Alias)
+    @Model.Short_Alias_Rules.Create.HtmlInput(Model.Short_Alias)
+    
+    <input type="submit" value="Create User Profile" />
+}

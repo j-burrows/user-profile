@@ -1,0 +1,6 @@
+﻿@model UserProfileLib.Business.BAvatar
+
+<figure id="AvatarView_@Model.Avatar_ID" class="AvatarView">
+    <img src="@Url.Content(Model.Url)" />
+    <figcaption>@Model.Name</figcaption>
+</figure>

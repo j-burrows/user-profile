@@ -1,0 +1,21 @@
+﻿@model User_Profile.Models.User_ProfileInfo
+
+<section class="listedProfileView">
+    <img class="ListedProfileAvatar" src="@Model.profile.avatar.Url"/>
+    <div class="ListedProfileLongName">@Model.profile.Long_Alias</div>
+    <div class="ListedProfileShortName">(@Model.profile.Short_Alias)</div>
+    <div class="ListedProfileButton">People who hate<br />@Model.enemies</div>
+    <div class="ListedProfileButton">People who love<br />@Model.friendlies</div>
+    <!--<div class="ListedProfileButton">Friends<br />@Model.friended</div>-->
+    @using (Html.BeginForm("FriendedUser_Create", "Home", FormMethod.Post,
+    new
+    {
+        @class = "PartialUpdateForm"
+    }))
+    { 
+        <input type="hidden" value="@Model.profile.User_Profile_ID" name="User_Profile_ID"/>
+        <input type="hidden" value="@Model.profile.username" name="Author_Name"/>
+        <input type="submit" class="ListedProfileButton"/>
+    }
+    <div class="ListedProfileButton">Enemies<br />@Model.enemies</div>
+</section>

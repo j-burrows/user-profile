@@ -1,0 +1,24 @@
+﻿@model User_Profile.Models.UserListViewModel
+
+
+@section LogoffButton{
+    @Html.Partial("LogoffButton")
+}
+
+@section NavStyle{
+    <style>
+    @{int i = 0;}
+    @foreach(var row in Model.navSection){
+        i++;
+        <text> #navRow_@i .navLink{ width: @((double) (99.8-row.Count()*0.4)/row.Count())%; } </text>
+    }
+    </style>
+}
+
+@section NavSection{
+    @Html.Partial("NavSection", Model.navSection)
+}
+
+@foreach(var profile in Model.allUsers){
+    @Html.Partial("UserProfile/UserProfile_ListView", profile)
+}

@@ -1,0 +1,7 @@
+﻿@model UserProfileLib.Business.BUser_Profile
+
+@{Model.Format();}
+
+<section id="UserProfileView_@Model.User_Profile_ID" class="UserProfileView">
+    @Model.Long_Alias (@Model.Short_Alias)
+</section>
